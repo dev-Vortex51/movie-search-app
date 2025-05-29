@@ -4,10 +4,10 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import Container from "./componets/Container";
-import Footer from "./componets/Footer";
-import Header from "./componets/Header";
-import MovieDetail from "./componets/MovieDetail";
+import Container from "./components/Container";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import MovieDetail from "./components/MovieDetail";
 import { QueryProvider } from "./contexts/QueryContext";
 
 function App() {

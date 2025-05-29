@@ -10,7 +10,7 @@ const Searchbar = () => {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search for a movie..."
-        className="w-full max-w-2xl px-7 py-3 rounded-full text-gray-800 dark:text-gray-100 bg-white dark:bg-gray-900 outline-none border-0 transition-colors duration-200"
+        className="w-full max-w-2xl px-7 py-3 rounded-full text-gray-800 dark:text-gray-100 bg-white dark:bg-gray-900 outline-none border-0 transition-colors duration-300"
         style={{
           boxShadow:
             "0 4px 24px 0 rgba(0,0,0,0.12), 0 1.5px 6px 0 rgba(0,0,0,0.10)",

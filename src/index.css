@@ -12,4 +12,9 @@
 
 body {
   font-family: "Lato", sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+html {
+  transition: background-color 0.3s, color 0.3s;
 }
