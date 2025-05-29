@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export interface MovieCardProps {
@@ -40,7 +40,15 @@ const MovieCard = ({
         }`}
         style={bgImage ? { backgroundImage: bgImage } : {}}
       >
-        {!bgImage && (
+        {bgImage ? (
+          <img
+            src={Poster}
+            alt={Title}
+            className="w-0 h-0"
+            onError={() => setImgError(true)}
+            style={{ display: "none" }}
+          />
+        ) : (
           <div className="text-center px-4 text-sm">
             <p className="text-2xl font-bold">No Image</p>
           </div>
