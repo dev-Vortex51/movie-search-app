@@ -9,7 +9,6 @@ export const getMovies = async (query: string) => {
   }
 
   const data = await res.json();
-  console.log(data);
   if (data.Response === "False") throw new Error(data.Error);
 
   return data.Search;
@@ -18,7 +17,6 @@ export const getMovies = async (query: string) => {
 export const getMovieDetails = async (id: string) => {
   const res = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&i=${id}`);
   const data = await res.json();
-  console.log(data);
   if (data.Response === "False") throw new Error(data.Error);
   return data;
 };

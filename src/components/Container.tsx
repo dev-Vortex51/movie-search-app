@@ -22,10 +22,7 @@ const Container = () => {
 
   return (
     <div className="w-full max-w-7xl mx-auto flex flex-col gap-6 py-6 px-4 sm:px-6 lg:px-8">
-      {/* Optional top filter or search UI */}
       <SubContainerTop />
-
-      {/* Movie grid and loading handling */}
       <MoviesContainer movies={filteredMovies || []} isPending={isPending} />
     </div>
   );
