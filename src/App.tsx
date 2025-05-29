@@ -14,13 +14,15 @@ function App() {
   return (
     <QueryProvider>
       <Router>
-        <div className="grid grid-rows-[auto_1fr_auto] min-h-screen ">
+        <div className="flex flex-col min-h-screen bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-950 transition-colors duration-300">
           <Header />
-          <Routes>
-            <Route path="/" element={<Navigate to="movies" />} />
-            <Route path="/movies" element={<Container />} />
-            <Route path="/movies/:id" element={<MovieDetail />} />
-          </Routes>
+          <main className="flex-1 flex flex-col">
+            <Routes>
+              <Route path="/" element={<Navigate to="movies" />} />
+              <Route path="/movies" element={<Container />} />
+              <Route path="/movies/:id" element={<MovieDetail />} />
+            </Routes>
+          </main>
           <Footer />
         </div>
       </Router>

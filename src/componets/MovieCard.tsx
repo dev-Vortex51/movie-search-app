@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-type MovieCardProps = {
+export interface MovieCardProps {
   Poster: string;
   Title: string;
   Type: string;
@@ -9,64 +9,70 @@ type MovieCardProps = {
   imdbID: string;
   Genre?: string;
   Plot?: string;
-};
+}
 
 const truncate = (text: string, maxLength: number) => {
   if (!text) return "";
   return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
 };
 
-const MovieCard: React.FC<MovieCardProps> = ({
+const MovieCard = ({
   Poster,
   Title,
   Type,
   Year,
   imdbID,
-  Genre,
   Plot,
-}) => {
+}: MovieCardProps) => {
+  const [imgError, setImgError] = useState(false);
+  const bgImage = !imgError && Poster !== "N/A" ? `url(${Poster})` : undefined;
+
   return (
-    <div className="flex flex-col md:flex-row bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300 max-w-2xl mx-auto my-8 overflow-hidden border border-gray-100">
-      <div className="relative w-full md:w-40 h-60 flex-shrink-0">
-        {Poster && Poster !== "N/A" ? (
-          <img
-            src={Poster}
-            alt={Title}
-            className="w-full h-full object-cover md:rounded-l-2xl md:rounded-tr-none rounded-t-2xl"
-          />
-        ) : (
-          <div className="w-full h-full bg-gray-200 flex items-center justify-center text-gray-400 text-4xl md:rounded-l-2xl md:rounded-tr-none rounded-t-2xl">
-            No Image
+    <Link
+      to={`/movies/${imdbID}`}
+      className="group relative h-[300px] rounded-2xl overflow-hidden shadow-lg transform transition-transform hover:scale-[1.02] border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900"
+    >
+      <div
+        className={`w-full h-full ${
+          bgImage
+            ? "bg-cover bg-center bg-no-repeat"
+            : "bg-gray-200 dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400"
+        }`}
+        style={bgImage ? { backgroundImage: bgImage } : {}}
+      >
+        {!bgImage && (
+          <div className="text-center px-4 text-sm">
+            <p className="text-2xl font-bold">No Image</p>
           </div>
         )}
-        <span className="absolute top-4 left-4 bg-blue-700 text-white text-xs px-3 py-1 rounded-full uppercase tracking-wide shadow font-semibold">
-          {Type}
-        </span>
       </div>
-      <div className="flex flex-col justify-between p-6 md:w-2/3 w-full">
-        <div>
-          <h2 className="text-lg font-bold text-gray-900 mb-2">
-            {truncate(Title, 25)}
+
+      <div
+        className="absolute inset-x-0 bottom-0 h-full flex flex-col justify-end bg-gradient-to-t from-black/70 to-transparent text-white p-4
+        transform translate-y-full group-hover:translate-y-0 sm:group-hover:translate-y-0 sm:opacity-0 sm:group-hover:opacity-100
+        transition-all duration-500 ease-in-out sm:pointer-events-none"
+      >
+        <div className="pointer-events-auto">
+          <span className="inline-block bg-blue-600 dark:bg-blue-500 text-xs font-bold px-3 py-1 rounded-full uppercase mb-2 truncate max-w-full">
+            {Type}
+          </span>
+          <h2 className="text-lg sm:text-xl font-semibold mb-1 truncate max-w-full">
+            {truncate(Title, 60)}
           </h2>
-          <div className="flex flex-wrap items-center gap-2 mb-3">
-            <span className="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded-full font-semibold">
+          <p className="text-sm text-gray-200 dark:text-gray-300 hidden sm:block truncate max-w-full">
+            {Plot ? truncate(Plot, 90) : "No description available."}
+          </p>
+          <div className="flex justify-between items-center mt-4">
+            <span className="bg-gray-800 dark:bg-gray-700 text-xs px-2 py-1 rounded-full truncate max-w-[80px]">
               {Year}
             </span>
+            <span className="bg-yellow-500 text-black text-xs font-semibold px-3 py-1 rounded-full">
+              View
+            </span>
           </div>
-          {Plot && (
-            <p className="text-gray-700 text-sm mb-4 line-clamp-3">
-              {truncate(Plot, 80)}
-            </p>
-          )}
         </div>
-        <Link
-          to={`/movies/${imdbID}`}
-          className="inline-block text-center bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 rounded-full px-4 py-2 text-sm font-bold shadow hover:from-yellow-500 hover:to-yellow-700 transition cursor-pointer "
-        >
-          View Details
-        </Link>
       </div>
-    </div>
+    </Link>
   );
 };
 
