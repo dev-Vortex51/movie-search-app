@@ -12,9 +12,12 @@ function HeaderAction() {
       >
         {isDarkMode ? <HiOutlineSun /> : <HiOutlineMoon />}
       </button>
-      <button className="h-10 w-10 flex items-center justify-center bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded hover:bg-gray-300 dark:hover:bg-gray-700 transition cursor-pointer">
+      <a
+        href="https://github.com/dev-Vortex51/movie-search-app"
+        className="h-10 w-10 flex items-center justify-center bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded hover:bg-gray-300 dark:hover:bg-gray-700 transition cursor-pointer"
+      >
         <BsGithub />
-      </button>
+      </a>
     </div>
   );
 }
